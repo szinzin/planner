@@ -5,43 +5,32 @@
 <title>📑 Timeline Dashboard</title>
 <style>
 body{margin:0;font:16px/1.5 system-ui,sans-serif;background:#f5f7fa;}
-h1{margin:1.2rem;font-size:24px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;padding:1.2rem;}
-.card{background:#fff;border-radius:12px;box-shadow:0 3px 8px rgb(0 0 0/.06);padding:1rem;display:flex;flex-direction:column;justify-content:space-between;}
-.card a{text-decoration:none;color:#2563eb;font-weight:600;word-break:break-all;}
-small{color:#6b7280;font-size:12px;}
+h1{margin:1.5rem;font-size:26px;}
+ul{list-style:none;padding:0 1.5rem;display:grid;gap:1rem;}
+li{background:#fff;border-radius:12px;box-shadow:0 3px 8px rgb(0 0 0/.06);}
+a{display:block;padding:1rem;color:#2563eb;font-weight:600;text-decoration:none;}
+a:hover{background:#f0f4ff;}
+small{display:block;color:#6b7280;font-size:12px;margin-top:.4rem;}
 </style>
-<script>
-async function load() {
-  const user = location.hostname.split('.')[0];           // <user>.github.io
-  const repo = location.pathname.replace(/^\/|\/$/g,'');  // -> repo
-  const branch = 'main';                                  // change if needed
-
-  /* 1️⃣  SHA du commit HEAD */
-  const br = await fetch(`https://api.github.com/repos/${user}/${repo}/branches/${branch}`)
-                   .then(r=>r.json());
-  const sha = br.commit.sha;
-
-  /* 2️⃣  Arbre complet */
-  const tree = await fetch(`https://api.github.com/repos/${user}/${repo}/git/trees/${sha}?recursive=1`)
-                     .then(r=>r.json());
-
-  const grid = document.querySelector('.grid');
-  tree.tree
-      .filter(n => n.path.endsWith('.html') && n.path!=='index.html')
-      .forEach(n=>{
-        const el=document.createElement('div');
-        el.className='card';
-        el.innerHTML=`<a href="${n.path}" target="_blank">${n.path}</a>
-                      <small>${(n.size/1024).toFixed(1)} KB</small>`;
-        grid.appendChild(el);
-      });
-}
-window.onload = load;
-</script>
 </head>
+
 <body>
-<h1>📑 Timelines du dépôt</h1>
-<div class="grid"></div>
+<h1>📑 Timelines disponibles</h1>
+
+<ul>
+  <li>
+    <a href="c+GLine/netflix-afr-planA.html" target="_blank">
+      Netflix AFR – Plan A
+      <small>…/c+GLine/netflix-afr-planA.html</small>
+    </a>
+  </li>
+  <li>
+    <a href="c+GLine/netflix-afr-planB.html" target="_blank">
+      Netflix AFR – Plan B
+      <small>…/c+GLine/netflix-afr-planB.html</small>
+    </a>
+  </li>
+</ul>
+
 </body>
 </html>
