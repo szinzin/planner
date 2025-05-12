@@ -13,7 +13,7 @@ mermaid.initialize({
   startOnLoad: true,
   theme: "base",
   themeCSS: `
-    text { font-size:24px; }
+    text { font-size:16px; }
     rect[id^="study-"]      { fill:#886CE4; }
     rect[id^="milestone-"]  { fill:lightgreen; }
     rect[id^="note-"]       { fill:lightgrey; stroke:lightgrey; }
@@ -48,13 +48,13 @@ mermaid.initialize({
 </script>
 
 <!-- ───────────────────────────────────────────────
-     2. Mise en page : split 35 % / 65 % + SVG full-width
+     2. Mise en page : 2 frames split + SVG full-width
 ────────────────────────────────────────────────── -->
 <style>
 body { margin:0; font:16px/1.45 system-ui, sans-serif; }
 .wrapper { display:flex; gap:1.5rem; padding:1rem; height:100vh; box-sizing:border-box; }
-.notes  { flex:0 0 35%; overflow:auto; }
-.chart  { flex:1 1 65%; min-width:0; }
+.notes  { flex:0 0 20%; overflow:auto; }
+.chart  { flex:1 1 80%; min-width:0; }
 .chart svg { width:100%!important; height:auto!important; }
 
 .legend { display:flex; flex-wrap:wrap; gap:.75rem; margin:.75rem 0; }
