@@ -113,7 +113,7 @@ gantt
 
     section OC | On Air
         Config OnePRM+DASH G9/G10 :milestone, success-dash, after oc5-3, 0d
-        OC ready Netflix Afr      :milestone, focus-oc-NetflixAfr, after oc5-3-5-Lot1, 0d
+        OC ready Netflix Afr      :milestone, focus-oc-NetflixAfr, after oc5-3-5-cpi, 0d
 
     section OC | PROD 20% Métro
         5.2.3                     :oc5-2-Lot1, 20-04-2025, 24-04-2025
@@ -153,9 +153,13 @@ gantt
         G9/G10 vs G11                   :mw-current, 20-04-2025, 30-06-2025
         MWA Lagaffe 9                   :mw-lagaffe, after mw-current, 07-07-2025
 
-    section MW | PROD Full Afrique+DROM
-        G9/G10 vs G11                   :mw-current-cpi, 20-04-2025, 03-06-2025
-        MWA Lagaffe 9                   :focus-mw-lagaffe-cpi, 03-06-2025, 07-07-2025
+    section MW | PROD 10k G11 Afrique
+        G9/G10 vs G11                   :mw-current-afr, 20-04-2025, 03-06-2025
+        MWA Lag. 9                      :focus-mw-lagaffe-afr, 03-06-2025, 07-07-2025
+
+    section MW | PROD Full DROM
+        G9/G10 vs G11                   :mw-current-drom, 20-04-2025, 03-06-2025
+        MWA Lag. 9                      :mw-lagaffe, after mw-current, 07-07-2025
     </pre>
   </main>
 
