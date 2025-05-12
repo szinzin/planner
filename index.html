@@ -37,6 +37,7 @@ mermaid.initialize({
     rect#mw-lagaffe,
     rect#valid-mw-lagaffe9,
     rect#oc5-4,
+    rect#oc5-4-Lot1,
     rect#valid-oc-5-4,
     rect#oc5-3Dash-cpi { fill:dodgerblue; }
   `,
@@ -113,18 +114,19 @@ gantt
         Config OnePRM + DASH G9/G10    :milestone, milestone-dash, after oc5-3-Lot1, 0d
         OC ready for Netflix Africa    :milestone, focus-oc-NetflixAfr, after oc5-3Dash, 0d
 
-    section OC | PROD Métro 20%
+    section OC | PROD 20% Métro
         5.2.3                          :oc5-2-Lot1, 20-04-2025, 24-04-2025
         5.3.3                          :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
-        5.3.5                          :oc5-3Dash-Lot1, after oc5-3-Lot1, 30-06-2025
-        5.4.0                          :oc5-4, after oc5-3Dash-Lot1, 07-07-2025
+        5.3.5                          :oc5-3Dash-Lot1, after oc5-3-Lot1, 17-06-2025
+        5.4.0                          :oc5-4-Lot1, after oc5-3Dash-Lot1, 07-07-2025
 
-    section OC | PROD Métro Full
+    section OC | PROD Full Métro
         5.2.3                          :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                          :oc5-3, 13-05-2025, 27-05-2025
-        5.3.5                          :oc5-3Dash, after oc5-3, 07-07-2025
+        5.3.5                          :oc5-3Dash, after oc5-3, 17-06-2025
+        5.4.0                          :oc5-4, after oc5-3Dash, 07-07-2025
 
-    section OC | PROD CPI
+    section OC | PROD Full Afrique+DROM
         5.2.3                          :oc5-2-cpi, 20-04-2025, 13-05-2025
         5.3.3                          :oc5-3-cpi, 13-05-2025, 27-05-2025
         5.3.5                          :oc5-3Dash-cpi, after oc5-3-cpi, 10-06-2025
@@ -142,17 +144,17 @@ gantt
     section MW | On Air
         MW ready for Netflix Africa    :milestone, focus-mw-NetflixAfr, after focus-valid-mwa-oc-5-4, 0d
 
-    section MW | PROD Métro 20%
+    section MW | PROD 20% Métro
         G9/G10 vs G11                  :mw-current-lot1, 20-04-2025, 17-06-2025
-        MWA Lagaffe                    :mw-lagaffe-lot1, after mw-current-lot1, 07-07-2025
+        MWA Lagaffe 9                   :mw-lagaffe-lot1, after mw-current-lot1, 07-07-2025
 
-    section MW | PROD Métro Full
+    section MW | PROD Full Métro
         G9/G10 vs G11                  :mw-current, 20-04-2025, 24-06-2025
-        MWA Lagaffe                    :mw-lagaffe, after mw-current, 07-07-2025
+        MWA Lagaffe 9                  :mw-lagaffe, after mw-current, 07-07-2025
 
-    section MW | PROD CPI
+    section MW | PROD Full Afrique+DROM
         G9/G10 vs G11                  :mw-current-cpi, 20-04-2025, 03-06-2025
-        MWA 10k AFR                    :focus-mw-lagaffe-cpi, 03-06-2025, 07-07-2025
+        MWA Lagaffe 9                  :focus-mw-lagaffe-cpi, 03-06-2025, 07-07-2025
     </pre>
   </main>
 
