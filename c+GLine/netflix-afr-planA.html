@@ -15,9 +15,11 @@ mermaid.initialize({
   theme: "neutral",
   themeCSS: `
     text { font-size:16px; }
-    rect[id^="study-"]      { fill:#886CE4; }
-    rect[id^="milestone-"]  { fill:lightgreen; }
-    rect[id^="note-"]       { fill:lightgrey; stroke:lightgrey; }
+    rect[id^="study"]      { fill:#8E44AD; }
+    g[data-resource="v1"] rect { fill:#146BFF; }
+
+    rect[id^="milestone"]  { fill:lightgreen; }
+    rect[id^="note"]       { fill:lightgrey; stroke:lightgrey; }
     rect[id^="readyFor"]    { fill:lightgreen; }
     rect[id^="target"]      { fill:#FF2D95; }
     rect[id^="focus"]       { fill:#FF2D95; }
@@ -30,7 +32,6 @@ mermaid.initialize({
     rect[id^="success"] { fill:limegreen; }
 
     /* MEP à venir */
-    rect#valid-oc-5-3-5,
     rect#oc5-3-5-Lot1,
     rect#oc5-3-5,
     rect#mw-lagaffe-afrique,
@@ -74,15 +75,24 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
   <!-- Colonne gauche : texte, légende, commentaires -->
   <aside class="notes">
     <h2>Commentaires</h2>
-    <p>Ajoute ici tes explications, liens, to-dos…</p>
+    <ul>
+        <li>
+            Echéance 19 mai
+            <ul>
+                <li>OneCore 5.4 bugfree</li>
+                <li>MW Lagaffe 9 bugfree</li>
+            </ul>
+        </li>
+    </ul><br/>
 
-    <h3>Légende</h3>
+    <h2>Légende</h2>
     <div class="legend">
-      <span><i class="sw" style="background:limegreen"></i>Go MEP</span>
-      <span><i class="sw" style="background:dodgerblue"></i>Prochaines MEP</span>
-      <span><i class="sw" style="background:#886CE4"></i>Étude</span>
-      <span><i class="sw diamond" style="background:lightgreen"></i>Jalon</span>
-      <span><i class="sw diamond" style="background:#FF2D95"></i>Focus / Target</span>
+        <span><i class="sw" style="background:#146BFF"></i>OC 5.3.5 x MW Prod</span>
+        <span><i class="sw" style="background:limegreen"></i>Go MEP</span>
+        <span><i class="sw" style="background:dodgerblue"></i>Prochaines MEP</span>
+        <span><i class="sw" style="background:#8E44AD"></i>Étude</span>
+        <span><i class="sw diamond" style="background:lightgreen"></i>Jalon</span>
+        <span><i class="sw diamond" style="background:#FF2D95"></i>Focus / Target</span>
     </div>
   </aside>
 
@@ -100,19 +110,19 @@ gantt
         Netflix AFR launch             :milestone, targetNetflixAfr, 07-07-2025, 0d
 
     section Validation
-        OC 5.3.4 x Lagaffe 9  :study-valid-mw-lagaffe9, 30-04-2025, 15d
-        -> 5.3.5              :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
-        OC 5.4.0 x Lagaffe 9  :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
-        OC 5.3.5 x MW Prod    :valid-oc-5-3-5, 05-05-2025, 15d
-        OC 5.4.0 x MW Prod    :valid-oc-5-4, after valid-oc-5-3-5, 15d
+        OC 5.3.4 x Lagaffe 9    :study-valid-mw-lagaffe9, 30-04-2025, 15d
+        -> 5.3.5                :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
+        OC 5.4.0 x Lagaffe 9    :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
+        OC 5.3.5 x MW Prod      v1  :v1, 05-05-2025, 15d
+        OC 5.4.0 x MW Prod      :valid-oc-5-4, after v1, 15d
 
     %%────────────────────────── OneCore ──────────────────────────
     section OC | Ready to deploy
-        ✔️ 5.3.5                  :milestone, milestone-valid-oc-5-3, after valid-oc-5-3-5, 0d
+        ✔️ 5.3.5                  :milestone, milestone-valid-oc-5-3, after v1, 0d
         ✔️ 5.4.0                  :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
 
     section OC | On Air
-        OnePRM + Full DASH        :milestone, success-dash, after oc5-3, 0d
+        OnePRM+Full DASH          :milestone, success-dash, after oc5-3, 0d
         OC ready Netflix Afr      :milestone, focus-oc-NetflixAfr, after oc5-3-5-cpi, 0d
 
     section OC | PROD 20% Métro
@@ -150,6 +160,7 @@ gantt
 
     section MW | On Air
         MW ready Netflix Afr            :milestone, focus-mw-NetflixAfr, after focus-valid-mwa-oc-5-4, 0d
+        MW Align.                       :milestone, success-mwa, after mw-current, 0d
 
     section MW | PROD 20% Métro
         G9/G10 vs G11                   :mw-current-lot1, 20-04-2025, 24-06-2025
