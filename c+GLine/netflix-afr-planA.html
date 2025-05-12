@@ -33,6 +33,7 @@ mermaid.initialize({
 
     /* MEP à venir */
     rect#oc5-3-5-Lot1,
+    rect#v1,
     rect#oc5-3-5,
     rect#mw-lagaffe-afrique,
     rect#mw-lagaffe-lot1,
@@ -61,8 +62,12 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
 .notes  { flex:0 0 20%; overflow:auto; }
 .chart  { flex:1 1 80%; min-width:0; }
 .chart svg { width:100%!important; height:auto!important; }
-
-.legend { display:flex; flex-wrap:wrap; gap:.75rem; margin:.75rem 0; }
+.legend{
+  display:flex;
+  flex-direction:column;   /* ⇦ 1 item per row */
+  gap:.6rem;
+  margin:.75rem 0;
+}
 .legend span { display:inline-flex; align-items:center; gap:.35rem; font-size:14px; }
 .sw { width:14px; height:14px; border-radius:2px; display:inline-block; }
 .sw.diamond { clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); }
@@ -112,14 +117,14 @@ gantt
     section Validation
         OC 5.3.4 x Lagaffe 9    :study-valid-mw-lagaffe9, 30-04-2025, 15d
         -> 5.3.5                :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
-        OC 5.4.0 x Lagaffe 9    :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
-        OC 5.3.5 x MW Prod      v1  :v1, 05-05-2025, 15d
-        OC 5.4.0 x MW Prod      :valid-oc-5-4, after v1, 15d
+        OC 5.4.3 x Lagaffe 9    :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
+        OC 5.3.5 x MW Prod      :v1, 05-05-2025, 15d
+        OC 5.4.3 x MW Prod      :valid-oc-5-4, after v1, 15d
 
     %%────────────────────────── OneCore ──────────────────────────
     section OC | Ready to deploy
         ✔️ 5.3.5                  :milestone, milestone-valid-oc-5-3, after v1, 0d
-        ✔️ 5.4.0                  :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
+        ✔️ 5.4.3                  :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
 
     section OC | On Air
         OnePRM+Full DASH          :milestone, success-dash, after oc5-3, 0d
@@ -129,25 +134,25 @@ gantt
         5.2.3                     :oc5-2-Lot1, 20-04-2025, 24-04-2025
         5.3.3                     :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
         5.3.5                     :oc5-3-5-Lot1, after oc5-3-Lot1, 17-06-2025
-        5.4.0                     :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
+        5.4.3                     :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
 
     section OC | PROD Full Métro
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 27-05-2025
         5.3.5                     :oc5-3-5, after oc5-3, 17-06-2025
-        5.4.0                     :oc5-4, after oc5-3-5, 07-07-2025
+        5.4.3                     :oc5-4, after oc5-3-5, 07-07-2025
 
     section OC | PROD 10k G11 Afrique
         5.2.3                     :oc5-2-cpi, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3-cpi, 13-05-2025, 27-05-2025
         5.3.5                     :oc5-3-5-cpi, after oc5-3-cpi, 10-06-2025
-        5.4.0                     :focus-oc5-4, 10-06-2025, 07-07-2025
+        5.4.3                     :focus-oc5-4, 10-06-2025, 07-07-2025
 
     section OC | PROD Full DROM
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 27-05-2025
         5.3.5                     :oc5-3-5, after oc5-3, 17-06-2025
-        5.4.0                     :oc5-4, after oc5-3-5, 07-07-2025
+        5.4.3                     :oc5-4, after oc5-3-5, 07-07-2025
 
     %%────────────────────────── MW ──────────────────────────
     section MW | Ready to deploy
