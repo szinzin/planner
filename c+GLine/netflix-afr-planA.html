@@ -14,10 +14,8 @@ mermaid.initialize({
   look: "handDrawn",
   theme: "neutral",
   themeCSS: `
-    text { font-size:16px; }
     rect[id^="study"]      { fill:#8E44AD; }
-    g[data-resource="v1"] rect { fill:#146BFF; }
-
+    rect[id^="mep"]      { fill:black; }
     rect[id^="milestone"]  { fill:lightgreen; }
     rect[id^="note"]       { fill:lightgrey; stroke:lightgrey; }
     rect[id^="readyFor"]    { fill:lightgreen; }
@@ -48,7 +46,11 @@ mermaid.initialize({
     displayMode: "compact",
     barHeight: 30,
     barGap: 15,
-    leftPadding: 300
+    leftPadding: 300,
+    fontSize: 16, // Font size
+    sectionFontSize: 16, // Font size for sections
+    topAxis: true, // When this flag is set, date labels will be added to the top of the chart,
+    topPadding: 60, // Margin between title and gantt diagram and between axis and gantt diagram.
   }
 });
 </script>
@@ -92,7 +94,6 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
 
     <h2>Légende</h2>
     <div class="legend">
-        <span><i class="sw" style="background:#146BFF"></i>OC 5.3.5 x MW Prod</span>
         <span><i class="sw" style="background:limegreen"></i>Go MEP</span>
         <span><i class="sw" style="background:dodgerblue"></i>Prochaines MEP</span>
         <span><i class="sw" style="background:#8E44AD"></i>Étude</span>
@@ -116,7 +117,7 @@ gantt
 
     section Validation
         OC 5.3.4 x Lagaffe 9    :study-valid-mw-lagaffe9, 30-04-2025, 15d
-        -> 5.3.5                :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
+        5.3.5                   :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
         OC 5.4.3 x Lagaffe 9    :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
         OC 5.3.5 x MW Prod      :v1, 05-05-2025, 15d
         OC 5.4.3 x MW Prod      :valid-oc-5-4, after v1, 15d
@@ -133,6 +134,7 @@ gantt
     section OC | PROD 20% Métro
         5.2.3                     :oc5-2-Lot1, 20-04-2025, 24-04-2025
         5.3.3                     :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
+        1                         :milestone, mep1, after oc5-3-Lot1, 0d
         5.3.5                     :oc5-3-5-Lot1, after oc5-3-Lot1, 17-06-2025
         5.4.3                     :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
 
@@ -186,5 +188,7 @@ gantt
   </main>
 
 </div>
+
+<script src="js/styling.js"></script>
 </body>
 </html>
