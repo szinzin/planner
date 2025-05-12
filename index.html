@@ -25,13 +25,13 @@ mermaid.initialize({
     /* Prod */
     rect#oc5-3-Lot1,
     rect#oc5-3,
-    rect#oc5-3Dash-cpi,
+    rect#oc5-3-5-cpi,
     rect[id^="success"] { fill:limegreen; }
 
     /* MEP à venir */
-    rect#valid-oc-5-3Dash,
-    rect#oc5-3Dash-Lot1,
-    rect#oc5-3Dash,
+    rect#valid-oc-5-3-5,
+    rect#oc5-3-5-Lot1,
+    rect#oc5-3-5,
     rect#mw-lagaffe-afrique,
     rect#mw-lagaffe-lot1,
     rect#mw-lagaffe,
@@ -39,7 +39,7 @@ mermaid.initialize({
     rect#oc5-4,
     rect#oc5-4-Lot1,
     rect#valid-oc-5-4,
-    rect#oc5-3Dash-cpi { fill:dodgerblue; }
+    rect#oc5-3-5-cpi { fill:dodgerblue; }
   `,
   gantt: {
     displayMode: "compact",
@@ -102,34 +102,34 @@ gantt
         OC 5.3.4 x Lagaffe 9  :study-valid-mw-lagaffe9, 30-04-2025, 15d
         -> 5.3.5              :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
         OC 5.4.0 x Lagaffe 9  :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
-        OC 5.3.5 x MW Prod    :valid-oc-5-3Dash, 05-05-2025, 15d
-        OC 5.4.0 x MW Prod    :study-valid-oc-5-4, after valid-oc-5-3Dash, 15d
+        OC 5.3.5 x MW Prod    :valid-oc-5-3-5, 05-05-2025, 15d
+        OC 5.4.0 x MW Prod    :study-valid-oc-5-4, after valid-oc-5-3-5, 15d
 
     %%────────────────────────── OneCore ──────────────────────────
     section OC | Ready to deploy
-        ✔️ 5.3.5                       :milestone, milestone-valid-oc-5-3, after valid-oc-5-3Dash, 0d
+        ✔️ 5.3.5                       :milestone, milestone-valid-oc-5-3, after valid-oc-5-3-5, 0d
         ✔️ 5.4.0                       :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
 
     section OC | On Air
         Config OnePRM + DASH G9/G10    :milestone, milestone-dash, after oc5-3-Lot1, 0d
-        OC ready for Netflix Africa    :milestone, focus-oc-NetflixAfr, after oc5-3Dash, 0d
+        OC ready for Netflix Africa    :milestone, focus-oc-NetflixAfr, after oc5-3-5-Lot1, 0d
 
     section OC | PROD 20% Métro
         5.2.3                          :oc5-2-Lot1, 20-04-2025, 24-04-2025
         5.3.3                          :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
-        5.3.5                          :oc5-3Dash-Lot1, after oc5-3-Lot1, 17-06-2025
-        5.4.0                          :oc5-4-Lot1, after oc5-3Dash-Lot1, 07-07-2025
+        5.3.5                          :oc5-3-5-Lot1, after oc5-3-Lot1, 17-06-2025
+        5.4.0                          :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
 
     section OC | PROD Full Métro
         5.2.3                          :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                          :oc5-3, 13-05-2025, 27-05-2025
-        5.3.5                          :oc5-3Dash, after oc5-3, 17-06-2025
-        5.4.0                          :oc5-4, after oc5-3Dash, 07-07-2025
+        5.3.5                          :oc5-3-5, after oc5-3, 17-06-2025
+        5.4.0                          :oc5-4, after oc5-3-5, 07-07-2025
 
     section OC | PROD Full Afrique+DROM
         5.2.3                          :oc5-2-cpi, 20-04-2025, 13-05-2025
         5.3.3                          :oc5-3-cpi, 13-05-2025, 27-05-2025
-        5.3.5                          :oc5-3Dash-cpi, after oc5-3-cpi, 10-06-2025
+        5.3.5                          :oc5-3-5-cpi, after oc5-3-cpi, 10-06-2025
         5.4.0                          :focus-oc5-4, 10-06-2025, 07-07-2025
 
     %%────────────────────────── MW ──────────────────────────
