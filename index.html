@@ -25,6 +25,7 @@ mermaid.initialize({
     /* Prod */
     rect#oc5-3-Lot1,
     rect#oc5-3,
+    rect#oc5-3-cpi,
     rect#oc5-3-5-cpi,
     rect[id^="success"] { fill:limegreen; }
 
@@ -44,8 +45,8 @@ mermaid.initialize({
   gantt: {
     displayMode: "compact",
     barHeight: 30,
-    barGap: 20,
-    leftPadding: 350
+    barGap: 15,
+    leftPadding: 300
   }
 });
 </script>
@@ -103,58 +104,58 @@ gantt
         -> 5.3.5              :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
         OC 5.4.0 x Lagaffe 9  :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
         OC 5.3.5 x MW Prod    :valid-oc-5-3-5, 05-05-2025, 15d
-        OC 5.4.0 x MW Prod    :study-valid-oc-5-4, after valid-oc-5-3-5, 15d
+        OC 5.4.0 x MW Prod    :valid-oc-5-4, after valid-oc-5-3-5, 15d
 
     %%────────────────────────── OneCore ──────────────────────────
     section OC | Ready to deploy
-        ✔️ 5.3.5                       :milestone, milestone-valid-oc-5-3, after valid-oc-5-3-5, 0d
-        ✔️ 5.4.0                       :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
+        ✔️ 5.3.5                  :milestone, milestone-valid-oc-5-3, after valid-oc-5-3-5, 0d
+        ✔️ 5.4.0                  :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
 
     section OC | On Air
-        Config OnePRM + DASH G9/G10    :milestone, milestone-dash, after oc5-3-Lot1, 0d
-        OC ready for Netflix Africa    :milestone, focus-oc-NetflixAfr, after oc5-3-5-Lot1, 0d
+        Config OnePRM+DASH G9/G10 :milestone, success-dash, after oc5-3, 0d
+        OC ready Netflix Afr      :milestone, focus-oc-NetflixAfr, after oc5-3-5-Lot1, 0d
 
     section OC | PROD 20% Métro
-        5.2.3                          :oc5-2-Lot1, 20-04-2025, 24-04-2025
-        5.3.3                          :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
-        5.3.5                          :oc5-3-5-Lot1, after oc5-3-Lot1, 17-06-2025
-        5.4.0                          :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
+        5.2.3                     :oc5-2-Lot1, 20-04-2025, 24-04-2025
+        5.3.3                     :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
+        5.3.5                     :oc5-3-5-Lot1, after oc5-3-Lot1, 17-06-2025
+        5.4.0                     :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
 
     section OC | PROD Full Métro
-        5.2.3                          :oc5-2, 20-04-2025, 13-05-2025
-        5.3.3                          :oc5-3, 13-05-2025, 27-05-2025
-        5.3.5                          :oc5-3-5, after oc5-3, 17-06-2025
-        5.4.0                          :oc5-4, after oc5-3-5, 07-07-2025
+        5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
+        5.3.3                     :oc5-3, 13-05-2025, 27-05-2025
+        5.3.5                     :oc5-3-5, after oc5-3, 17-06-2025
+        5.4.0                     :oc5-4, after oc5-3-5, 07-07-2025
 
     section OC | PROD Full Afrique+DROM
-        5.2.3                          :oc5-2-cpi, 20-04-2025, 13-05-2025
-        5.3.3                          :oc5-3-cpi, 13-05-2025, 27-05-2025
-        5.3.5                          :oc5-3-5-cpi, after oc5-3-cpi, 10-06-2025
-        5.4.0                          :focus-oc5-4, 10-06-2025, 07-07-2025
+        5.2.3                     :oc5-2-cpi, 20-04-2025, 13-05-2025
+        5.3.3                     :oc5-3-cpi, 13-05-2025, 27-05-2025
+        5.3.5                     :oc5-3-5-cpi, after oc5-3-cpi, 10-06-2025
+        5.4.0                     :focus-oc5-4, 10-06-2025, 07-07-2025
 
     %%────────────────────────── MW ──────────────────────────
     section MW | Ready to deploy
         ✔️ Lagaffe 9                  :milestone, milestone-valid-mw, after study-valid-mw-lagaffe9, 0d
 
     section MW | Dépendences Alignement
-        Délai expiration des DL TS     :note-DLExpired, after oc5-3, 30d
-        Étude DevOps (Solutioning)     :study-DevOps, 24-04-2025, 30-05-2025
-        Deploiement MW dérisqué        :milestone, milestone-MWA2, after study-DevOps, 0d
+        Délai expiration des DL TS      :note-DLExpired, after oc5-3, 30d
+        Étude DevOps (Solutioning)      :study-DevOps, 24-04-2025, 30-05-2025
+        Deploiement MW dérisqué         :milestone, milestone-MWA2, after study-DevOps, 0d
 
     section MW | On Air
-        MW ready for Netflix Africa    :milestone, focus-mw-NetflixAfr, after focus-valid-mwa-oc-5-4, 0d
+        MW ready Netflix Afr            :milestone, focus-mw-NetflixAfr, after focus-valid-mwa-oc-5-4, 0d
 
     section MW | PROD 20% Métro
-        G9/G10 vs G11                  :mw-current-lot1, 20-04-2025, 17-06-2025
+        G9/G10 vs G11                   :mw-current-lot1, 20-04-2025, 17-06-2025
         MWA Lagaffe 9                   :mw-lagaffe-lot1, after mw-current-lot1, 07-07-2025
 
     section MW | PROD Full Métro
-        G9/G10 vs G11                  :mw-current, 20-04-2025, 24-06-2025
-        MWA Lagaffe 9                  :mw-lagaffe, after mw-current, 07-07-2025
+        G9/G10 vs G11                   :mw-current, 20-04-2025, 24-06-2025
+        MWA Lagaffe 9                   :mw-lagaffe, after mw-current, 07-07-2025
 
     section MW | PROD Full Afrique+DROM
-        G9/G10 vs G11                  :mw-current-cpi, 20-04-2025, 03-06-2025
-        MWA Lagaffe 9                  :focus-mw-lagaffe-cpi, 03-06-2025, 07-07-2025
+        G9/G10 vs G11                   :mw-current-cpi, 20-04-2025, 03-06-2025
+        MWA Lagaffe 9                   :focus-mw-lagaffe-cpi, 03-06-2025, 07-07-2025
     </pre>
   </main>
 
