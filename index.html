@@ -11,7 +11,8 @@
 <script>
 mermaid.initialize({
   startOnLoad: true,
-  theme: "base",
+  look: "handDrawn",
+  theme: "neutral",
   themeCSS: `
     text { font-size:16px; }
     rect[id^="study-"]      { fill:#886CE4; }
@@ -35,8 +36,7 @@ mermaid.initialize({
     rect#mw-lagaffe,
     rect#valid-mw-lagaffe9,
     rect#oc5-4,
-    rect#valid-oc-5-4,
-    rect#valid-mwa-oc-5-4 { fill:dodgerblue; }
+    rect#valid-oc-5-4
   `,
   gantt: {
     displayMode: "compact",
@@ -96,16 +96,16 @@ gantt
         Netflix AFR launch             :milestone, targetNetflixAfr, 07-07-2025, 0d
 
     section Validation
-        Valid Lagaffe 9 x OC 5.3.4     :study-valid-mw-lagaffe9, 30-04-2025, 15d
-        -> 5.3.5                       :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
-        Valid Lagaffe 9 x OC 5.4.X     :valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
-        Valid 5.3.5                    :valid-oc-5-3Dash, 05-05-2025, 15d
-        Valid 5.4.X (MW Prod)          :study-valid-oc-5-4, after valid-oc-5-3Dash, 15d
+        OC 5.3.4 x Lagaffe 9  :study-valid-mw-lagaffe9, 30-04-2025, 15d
+        -> 5.3.5              :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
+        OC 5.4.X Lagaffe 9    :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
+        OC 5.3.5 x MW Prod    :valid-oc-5-3Dash, 05-05-2025, 15d
+        OC 5.4.X x MW Prod    :study-valid-oc-5-4, after valid-oc-5-3Dash, 15d
 
     %%────────────────────────── OC – Ready to deploy ──────────────────────────
     section OC | Ready to deploy
         ✔️ 5.3.5                       :milestone, milestone-valid-oc-5-3, after valid-oc-5-3Dash, 0d
-        ✔️ 5.4.X                       :milestone, milestone-valid-oc-5-4, after valid-mwa-oc-5-4, 0d
+        ✔️ 5.4.X                       :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
 
     section OC | On Air
         Config OnePRM + DASH G9/G10    :milestone, milestone-dash, after oc5-3-Lot1, 0d
