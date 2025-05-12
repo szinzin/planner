@@ -6,37 +6,37 @@
 <style>
 body{margin:0;font:16px/1.5 system-ui,sans-serif;background:#f5f7fa;}
 h1{margin:1.2rem;font-size:24px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;padding:1.2rem;}
-.card{background:#fff;border-radius:12px;box-shadow:0 3px 8px rgb(0 0 0/.06);padding:1rem;display:flex;flex-direction:column;justify-content:space-between;}
-.card a{text-decoration:none;color:#2563eb;font-weight:600;}
-small{color:#6b7280;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;padding:1.2rem;}
+.card{background:#fff;border-radius:12px;box-shadow:0 3px 8px rgb(0 0 0/.06);padding:1rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
+.card a{text-decoration:none;color:#2563eb;font-weight:600;word-break:break-all;}
+small{color:#6b7280;font-size:12px;}
 </style>
 <script>
-/* === fetch repo file list and build cards === */
 async function load() {
-  const repo = location.pathname.replace(/^\/|\/$/g,'') || 'timeline-mermaid';  // default
-  const user = location.hostname.split('.')[0];                                 // <user>.github.io
-  const api  = `https://api.github.com/repos/${user}/${repo}/contents`;
-  const res  = await fetch(api);
-  const files= await res.json();
-  const grid = document.querySelector('.grid');
-  files
-    .filter(f => f.name.endsWith('.html') && f.name!=='index.html')
-    .forEach(f=>{
-      const el=document.createElement('div');
-      el.className='card';
-      el.innerHTML=`<a href="${f.name}" target="_blank">${f.name}</a>
-                    <small>${(f.size/1024).toFixed(1)} KB – ${new Date(f.git_url.split('/').pop()*1000).toLocaleDateString()}</small>`;
-      grid.appendChild(el);
-    });
+  const user  = location.hostname.split('.')[0];                 // <user>.github.io
+  const repo  = location.pathname.replace(/^\/|\/$/g,'') || 'roadmap-notion';
+  /* 1️⃣ get default branch sha */
+  const head  = await fetch(`https://api.github.com/repos/${user}/${repo}`).then(r=>r.json());
+  const sha   = head.default_branch;
+  /* 2️⃣ get full tree */
+  const api   = `https://api.github.com/repos/${user}/${repo}/git/trees/${sha}?recursive=1`;
+  const tree  = await fetch(api).then(r=>r.json());
+  const grid  = document.querySelector('.grid');
+  tree.tree
+      .filter(node => node.path.endsWith('.html') && node.path!=='index.html')
+      .forEach(node => {
+        const el=document.createElement('div');
+        el.className='card';
+        el.innerHTML=`<a href="${node.path}" target="_blank">${node.path}</a>
+                      <small>${(node.size/1024).toFixed(1)} KB</small>`;
+        grid.appendChild(el);
+      });
 }
 window.onload=load;
 </script>
 </head>
 <body>
-<h1>📑 Timelines du repository</h1>
-<div class="grid">
-  <!-- JS injects .card elements here -->
-</div>
+  <h1>📑 Timelines du dépôt</h1>
+  <div class="grid"></div>
 </body>
 </html>
