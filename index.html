@@ -2,38 +2,59 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
-<title>Roadmap Mermaid – démo</title>
+<title>Roadmap GLine</title>
 
-<!-- 1. Librairie Mermaid -->
+<!-- ───────────────────────────────────────────────
+     1. Mermaid (CDN) + configuration globale
+────────────────────────────────────────────────── -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
-<!-- 2. Initialisation -->
 <script>
 mermaid.initialize({
   startOnLoad: true,
   theme: "base",
   themeCSS: `
-    rect#be-api { fill:#32CD32; }
-    rect#fe-ui  { fill:#4169E1; }
-    rect[id^="study-"] { fill:#8E44AD; }
-    polygon[id^="ms-"] { fill:#FF5252; stroke:#000; }
-    text { font-size:16px; }
+    text { font-size:24px; }
+    rect[id^="study-"]      { fill:#886CE4; }
+    rect[id^="milestone-"]  { fill:lightgreen; }
+    rect[id^="note-"]       { fill:lightgrey; stroke:lightgrey; }
+    rect[id^="readyFor"]    { fill:lightgreen; }
+    rect[id^="target"]      { fill:#FF2D95; }
+    rect[id^="focus"]       { fill:#FF2D95; }
+
+    /* Prod */
+    rect#oc5-3-Lot1,
+    rect#oc5-3,
+    rect[id^="success"]  { fill:limegreen; }
+
+    /* MEP à venir */
+    rect#valid-oc-5-3Dash,
+    rect#oc5-3Dash-Lot1,
+    rect#oc5-3Dash,
+    rect#mw-lagaffe-afrique,
+    rect#mw-lagaffe-lot1,
+    rect#mw-lagaffe,
+    rect#valid-mw-lagaffe9,
+    rect#oc5-4,
+    rect#valid-oc-5-4,
+    rect#valid-mwa-oc-5-4 { fill:dodgerblue; }
   `,
   gantt: {
     displayMode: "compact",
-    barHeight: 22,
-    barGap: 8,
-    leftPadding: 140
+    barHeight: 45,
+    barGap: 30,
+    leftPadding: 350
   }
 });
 </script>
 
-<!-- 3. Mise en page -->
+<!-- ───────────────────────────────────────────────
+     2. Mise en page : split 35 % / 65 % + SVG full-width
+────────────────────────────────────────────────── -->
 <style>
-body   { margin:0; font:16px/1.45 system-ui, sans-serif; }
-.wrapper{ display:flex; gap:1.5rem; padding:1rem; height:100vh; box-sizing:border-box; }
-.notes { flex:0 0 35%; overflow:auto; }
-.chart { flex:1 1 65%; min-width:0; }
+body { margin:0; font:16px/1.45 system-ui, sans-serif; }
+.wrapper { display:flex; gap:1.5rem; padding:1rem; height:100vh; box-sizing:border-box; }
+.notes  { flex:0 0 35%; overflow:auto; }
+.chart  { flex:1 1 65%; min-width:0; }
 .chart svg { width:100%!important; height:auto!important; }
 
 .legend { display:flex; flex-wrap:wrap; gap:.75rem; margin:.75rem 0; }
@@ -46,36 +67,90 @@ body   { margin:0; font:16px/1.45 system-ui, sans-serif; }
 <body>
 <div class="wrapper">
 
-  <!-- Colonne gauche -->
+  <!-- Colonne gauche : texte, légende, commentaires -->
   <aside class="notes">
     <h2>Commentaires</h2>
-    <p>Cet espace contient tes explications, liens Jira, etc.</p>
+    <p>Ajoute ici tes explications, liens, to-dos…</p>
 
     <h3>Légende</h3>
     <div class="legend">
-      <span><i class="sw" style="background:#32CD32"></i>En production</span>
-      <span><i class="sw" style="background:#4169E1"></i>MEP à venir</span>
-      <span><i class="sw" style="background:#8E44AD"></i>Étude</span>
-      <span><i class="sw diamond" style="background:#FF5252"></i>Jalon</span>
+      <span><i class="sw" style="background:limegreen"></i>Go MEP</span>
+      <span><i class="sw" style="background:dodgerblue"></i>Prochaines MEP</span>
+      <span><i class="sw" style="background:#886CE4"></i>Étude</span>
+      <span><i class="sw diamond" style="background:lightgreen"></i>Jalon</span>
+      <span><i class="sw diamond" style="background:#FF2D95"></i>Focus / Target</span>
     </div>
   </aside>
 
-  <!-- Colonne droite : Mermaid -->
+  <!-- Colonne droite : diagramme Mermaid -->
   <main class="chart">
     <pre class="mermaid">
 gantt
-    title  Roadmap 2025
-    dateFormat  YYYY-MM-DD
+    title  Légende : 🟩 Go MEP | 🟦 Prochaines MEP | 🟪 Etude
+    dateFormat  DD-MM-YYYY
     axisFormat  %d %b
+    todayMarker stroke-width:2px,stroke:#ff0000,opacity:0.8
 
-    section OneCore
-        API v1       :be-api,   2025-03-01, 20d
-        UI v1        :fe-ui,    after be-api, 20d
-        Étude DevOps :study-devops, after fe-ui, 15d
+    %%────────────────────────── Enjeux / Validation ──────────────────────────
+    section Enjeux Business
+        Netflix AFR launch             :milestone, targetNetflixAfr, 07-07-2025, 0d
 
-    section
-    section Jalons
-        Lancement PROD :milestone, ms-launch, after study-devops, 0d
+    section Validation
+        Valid Lagaffe 9 x OC 5.3.4     :study-valid-mw-lagaffe9, 30-04-2025, 15d
+        -> 5.3.5                       :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
+        Valid Lagaffe 9 x OC 5.4.X     :valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
+        Valid 5.3.5                    :valid-oc-5-3Dash, 05-05-2025, 15d
+        Valid 5.4.X (MW Prod)          :study-valid-oc-5-4, after valid-oc-5-3Dash, 15d
+
+    %%────────────────────────── OC – Ready to deploy ──────────────────────────
+    section OC | Ready to deploy
+        ✔️ 5.3.5                       :milestone, milestone-valid-oc-5-3, after valid-oc-5-3Dash, 0d
+        ✔️ 5.4.X                       :milestone, milestone-valid-oc-5-4, after valid-mwa-oc-5-4, 0d
+
+    section OC | On Air
+        Config OnePRM + DASH G9/G10    :milestone, milestone-dash, after oc5-3-Lot1, 0d
+        OC ready for Netflix Africa    :milestone, focus-oc-NetflixAfr, after oc5-3Dash, 0d
+
+    section OC | PROD Métro 20%
+        5.2.3                          :oc5-2-Lot1, 20-04-2025, 24-04-2025
+        5.3.3                          :oc5-3-Lot1, after oc5-2-Lot1, 20-05-2025
+        5.3.5                          :oc5-3Dash-Lot1, after oc5-3-Lot1, 30-06-2025
+        5.4.X                          :oc5-4, after oc5-3Dash-Lot1, 07-07-2025
+
+    section OC | PROD Métro Full
+        5.2.3                          :oc5-2, 20-04-2025, 13-05-2025
+        5.3.3                          :oc5-3, 13-05-2025, 27-05-2025
+        5.3.5                          :oc5-3Dash, after oc5-3, 07-07-2025
+
+    section OC | PROD CPI
+        5.2.3                          :oc5-2-cpi, 20-04-2025, 13-05-2025
+        5.3.3                          :oc5-3-cpi, 13-05-2025, 27-05-2025
+        5.3.5                          :oc5-3Dash-cpi, after oc5-3-cpi, 10-06-2025
+        5.4.X                          :focus-oc5-4, 10-06-2025, 07-07-2025
+
+    %%────────────────────────── MW ──────────────────────────
+    section MW | Ready to deploy
+        ✔️ Lagaffe 9                  :milestone, milestone-valid-mw, after study-valid-mw-lagaffe9, 0d
+
+    section MW | Dépendences Alignement
+        Délai expiration des DL TS     :note-DLExpired, after oc5-3, 30d
+        Étude DevOps (Solutioning)     :study-DevOps, 24-04-2025, 30d
+        Deploiement MW dérisqué        :milestone, milestone-MWA2, after study-DevOps, 0d
+
+    section MW | On Air
+        MW ready for Netflix Africa    :milestone, focus-mw-NetflixAfr, after mw-current-cpi, 0d
+
+    section MW | PROD Métro 20%
+        G9/G10 vs G11                  :mw-current-lot1, 20-04-2025, 17-06-2025
+        MWA Lagaffe                    :mw-lagaffe-lot1, after mw-current-lot1, 07-07-2025
+
+    section MW | PROD Métro Full
+        G9/G10 vs G11                  :mw-current, 20-04-2025, 24-06-2025
+        MWA Lagaffe                    :mw-lagaffe, after mw-current, 07-07-2025
+
+    section MW | PROD CPI
+        G9/G10 vs G11                  :mw-current-cpi, 20-04-2025, 03-06-2025
+        MWA 10k AFR                    :focus-mw-lagaffe-cpi, 03-06-2025, 07-07-2025
     </pre>
   </main>
 
