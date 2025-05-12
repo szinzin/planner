@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Roadmap Mermaid – démo</title>
+
+<!-- 1. Librairie Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+<!-- 2. Initialisation -->
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: "base",
+  themeCSS: `
+    rect#be-api { fill:#32CD32; }
+    rect#fe-ui  { fill:#4169E1; }
+    rect[id^="study-"] { fill:#8E44AD; }
+    polygon[id^="ms-"] { fill:#FF5252; stroke:#000; }
+    text { font-size:16px; }
+  `,
+  gantt: {
+    displayMode: "compact",
+    barHeight: 22,
+    barGap: 8,
+    leftPadding: 140
+  }
+});
+</script>
+
+<!-- 3. Mise en page -->
+<style>
+body   { margin:0; font:16px/1.45 system-ui, sans-serif; }
+.wrapper{ display:flex; gap:1.5rem; padding:1rem; height:100vh; box-sizing:border-box; }
+.notes { flex:0 0 35%; overflow:auto; }
+.chart { flex:1 1 65%; min-width:0; }
+.chart svg { width:100%!important; height:auto!important; }
+
+.legend { display:flex; flex-wrap:wrap; gap:.75rem; margin:.75rem 0; }
+.legend span { display:inline-flex; align-items:center; gap:.35rem; font-size:14px; }
+.sw { width:14px; height:14px; border-radius:2px; display:inline-block; }
+.sw.diamond { clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); }
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- Colonne gauche -->
+  <aside class="notes">
+    <h2>Commentaires</h2>
+    <p>Cet espace contient tes explications, liens Jira, etc.</p>
+
+    <h3>Légende</h3>
+    <div class="legend">
+      <span><i class="sw" style="background:#32CD32"></i>En production</span>
+      <span><i class="sw" style="background:#4169E1"></i>MEP à venir</span>
+      <span><i class="sw" style="background:#8E44AD"></i>Étude</span>
+      <span><i class="sw diamond" style="background:#FF5252"></i>Jalon</span>
+    </div>
+  </aside>
+
+  <!-- Colonne droite : Mermaid -->
+  <main class="chart">
+    <pre class="mermaid">
+gantt
+    title  Roadmap 2025
+    dateFormat  YYYY-MM-DD
+    axisFormat  %d %b
+
+    section OneCore
+        API v1       :be-api,   2025-03-01, 20d
+        UI v1        :fe-ui,    after be-api, 20d
+        Étude DevOps :study-devops, after fe-ui, 15d
+
+    section
+    section Jalons
+        Lancement PROD :milestone, ms-launch, after study-devops, 0d
+    </pre>
+  </main>
+
+</div>
+</body>
+</html>
