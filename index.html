@@ -100,11 +100,11 @@ gantt
     section Validation
         OC 5.3.4 x Lagaffe 9  :study-valid-mw-lagaffe9, 30-04-2025, 15d
         -> 5.3.5              :valid-mw-lagaffe9, after study-valid-mw-lagaffe9, 5d
-        OC 5.4.0 Lagaffe 9    :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
+        OC 5.4.0 x Lagaffe 9  :focus-valid-mwa-oc-5-4, after valid-mw-lagaffe9, 15d
         OC 5.3.5 x MW Prod    :valid-oc-5-3Dash, 05-05-2025, 15d
         OC 5.4.0 x MW Prod    :study-valid-oc-5-4, after valid-oc-5-3Dash, 15d
 
-    %%────────────────────────── OC – Ready to deploy ──────────────────────────
+    %%────────────────────────── OneCore ──────────────────────────
     section OC | Ready to deploy
         ✔️ 5.3.5                       :milestone, milestone-valid-oc-5-3, after valid-oc-5-3Dash, 0d
         ✔️ 5.4.0                       :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
@@ -140,7 +140,7 @@ gantt
         Deploiement MW dérisqué        :milestone, milestone-MWA2, after study-DevOps, 0d
 
     section MW | On Air
-        MW ready for Netflix Africa    :milestone, focus-mw-NetflixAfr, after mw-current-cpi, 0d
+        MW ready for Netflix Africa    :milestone, focus-mw-NetflixAfr, after focus-valid-mwa-oc-5-4, 0d
 
     section MW | PROD Métro 20%
         G9/G10 vs G11                  :mw-current-lot1, 20-04-2025, 17-06-2025
