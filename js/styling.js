@@ -1,27 +1,38 @@
-/* ==========  Script qui remonte tous les jalons en fin de liste  ========== */
+/* js/styling.js
+   → Remonte tous les <rect class="milestone"> et leurs textes associés
+     en fin du parent pour qu’ils soient dessinés au premier plan. */
 
-/* Déplace tous les jalons (g.task ayant un <polygon>) en fin de liste
-   pour qu’ils passent visuellement AU-DESSUS des barres. */
-document.addEventListener('DOMContentLoaded', () => {
-  const moveMilestones = () => {
+(function() {
+  let attempts = 0;
+  const maxAttempts = 20;
+  const delay       = 300; // ms entre chaque vérification
+
+  const timer = setInterval(() => {
+    attempts++;
+    // 1️⃣ Récupérer le SVG Mermaid
     const svg = document.querySelector('.chart svg');
-    if (!svg) return;
+    if (!svg) {
+      if (attempts >= maxAttempts) clearInterval(timer);
+      return;
+    }
 
-    /* Parent contenant toutes les barres/tasks (varie selon la version) */
-    const tasksGroup =
-      svg.querySelector('g[id="tasks"]')     ||   // v10.x
-      svg.querySelector('g.tasks')           ||   // fallback
-      svg;                                        // dernier recours
+    // 2️⃣ Lister tous les rectangles jalons
+    const rects = Array.from(svg.querySelectorAll('rect.milestone'));
+    if (rects.length === 0) {
+      if (attempts >= maxAttempts) clearInterval(timer);
+      return;
+    }
 
-    /* Tous les groupes <g> qui possèdent un losange (<polygon>) */
-    const milestones = Array.from(
-      svg.querySelectorAll('g.task')
-    ).filter(g => g.querySelector('polygon'));
+    // 3️⃣ Pour chaque milestone, déplacer le rect ET son texte associé
+    rects.forEach(rect => {
+      const parent = rect.parentNode;
+      parent.appendChild(rect);
 
-    /* On les remet à la fin ⇒ dessinés au premier plan */
-    milestones.forEach(g => tasksGroup.appendChild(g));
-  };
+      const text = svg.querySelector(`text#${rect.id}-text`);
+      if (text) parent.appendChild(text);
+    });
 
-  /* Laisse le temps à Mermaid de générer le SVG (500 ms suffisent) */
-  setTimeout(moveMilestones, 500);
-});
+    // 4️⃣ Tout est déplacé → on arrête le polling
+    clearInterval(timer);
+  }, delay);
+})();
