@@ -14,13 +14,20 @@ mermaid.initialize({
   look: "handDrawn",
   theme: "neutral",
   themeCSS: `
+    rect.crit1, rect.crit2, rect.crit3 { fill:#d32f2f; stroke:transparent; }  /* rouge foncé */
+    rect.active1, rect.active2, rect.active3 { fill:#fbc02d; stroke:transparent; }  /* jaune */
+    rect.done1, rect.done2, rect.done3  { fill:#388e3c; stroke:transparent; }  /* vert foncé */
+
     rect[id^="study"]      { fill:#8E44AD; }
     rect[id^="mep"]      { fill:black; }
     rect[id^="milestone"]  { fill:lightgreen; }
+    rect[id^="warning"]       { fill:lightgrey; stroke:lightgrey; }
     rect[id^="note"]       { fill:lightgrey; stroke:lightgrey; }
     rect[id^="readyFor"]    { fill:lightgreen; }
     rect[id^="target"]      { fill:#FF2D95; }
     rect[id^="focus"]       { fill:#FF2D95; }
+
+    rect[id="br"]  { fill:transparent; stroke:transparent; }
 
     /* Prod */
     rect#oc5-3-Lot1,
@@ -44,9 +51,9 @@ mermaid.initialize({
   `,
   gantt: {
     displayMode: "compact",
-    barHeight: 30,
+    barHeight: 25,
     barGap: 15,
-    leftPadding: 300,
+    leftPadding: 250,
     fontSize: 16, // Font size
     sectionFontSize: 16, // Font size for sections
     topAxis: true, // When this flag is set, date labels will be added to the top of the chart,
@@ -128,6 +135,11 @@ gantt
         ✔️ 5.3.5                  :milestone, milestone-valid-oc-5-3, after v1, 0d
         ✔️ 5.4.3                  :milestone, milestone-valid-oc-5-4, after focus-valid-mwa-oc-5-4, 0d
 
+    section OC | Dépendances
+        MEP HAPI PDL Full DASH     : milestone, milestone-hapi, 20-05-2025, 0d
+        .                                   : br, after milestone-hapi, 07-07-2025
+        Débit DASH non bridée, PDL 4K G9/G10: active, debitDl, after milestone-hapi, 27-05-2025
+
     section OC | On Air
         OnePRM+Full DASH          :milestone, success-dash, after oc5-3, 0d
         OC ready Netflix Afr      :milestone, focus-oc-NetflixAfr, after oc5-3-5-cpi, 0d
@@ -159,7 +171,7 @@ gantt
     section OC | PROD Full DROM
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 27-05-2025
-        |                        :milestone, mep2, after oc5-3, 0d
+        |                         :milestone, mep2, after oc5-3, 0d
         5.3.5                     :oc5-3-5, after oc5-3, 17-06-2025
         |                         :milestone, mep5, after oc5-3-5-Lot1, 0d
         5.4.3                     :oc5-4, after oc5-3-5, 07-07-2025
@@ -168,13 +180,13 @@ gantt
     section MW | Ready to deploy
         ✔️ Lagaffe 9                  :milestone, milestone-valid-mw, after study-valid-mw-lagaffe9, 0d
 
-    section MW | Dépendences Alignement
+    section MW | Dépendances
         Délai expiration des DL TS      :note-DLExpired, after oc5-3, 30d
         Étude DevOps (Solutioning)      :study-DevOps, 24-04-2025, 30-05-2025
         Deploiement MW dérisqué         :milestone, milestone-MWA2, after study-DevOps, 0d
 
     section MW | On Air
-        MW ready Netflix Afr            :milestone, focus-mw-NetflixAfr, after focus-valid-mwa-oc-5-4, 0d
+        MW ready Netflix Afr            :milestone, focus-mw-NetflixAfr, after mw-current-afr, 0d
         MW Align.                       :milestone, success-mwa, after mw-current, 0d
 
     section MW | PROD 20% Métro
