@@ -36,3 +36,34 @@
     clearInterval(timer);
   }, delay);
 })();
+
+
+/* js/removePipeMilestoneText.js */
+(function() {
+  const maxTries = 20;
+  let tries = 0;
+
+  const timer = setInterval(() => {
+    tries++;
+    const svg = document.querySelector('.chart svg') || document.querySelector('svg.mermaid');
+    if (!svg) {
+      if (tries >= maxTries) clearInterval(timer);
+      return;
+    }
+
+    // Une fois le SVG prêt, on peut arrêter de poller
+    clearInterval(timer);
+
+    // 1️⃣ Sélectionne tous les <text class="milestoneText"> dans le SVG
+    const nodes = svg.querySelectorAll('text.milestoneText');
+    nodes.forEach(node => {
+      const txt = node.textContent.trim();
+      // 2️⃣ Si le contenu commence par '|', on vide
+      if (txt.startsWith('|')) {
+        console.log('remove ▶', txt);
+        node.innerHTML = '';
+      }
+    });
+
+  }, 250);
+})();
