@@ -84,6 +84,7 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
 .legend span { display:inline-flex; align-items:center; gap:.35rem; font-size:14px; }
 .sw { width:14px; height:14px; border-radius:2px; display:inline-block; }
 .sw.diamond { clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); }
+.warning {color: orange; font-weight: bold;}
 </style>
 </head>
 
@@ -95,11 +96,13 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
     <h2>Commentaires</h2>
     <ul>
         <li>
-            <b>Hypothèses :</b>
+            <b>Décalages de planning :</b>
             <ul>
-                <li>OneCore 5.3.5 bugfree</li>
-                <li>OneCore 5.4.3 bugfree</li>
-                <li>MW Lagaffe 9 bugfree</li>
+                <li>
+                    Validation 15/05, <span class="warning">retard 1 semaine</span><br/>
+                    Campagnes 5.4.3 de 3,5 semaines au lieu de 2.<br/>
+                    Causes: contour important + 1 we de pont.
+                </li>
             </ul>
         </li>
         <li><b>OnePRM : </b>Sont concernés par cette migration les abonnés G11 Monde + les G9/G10 CPI (530k abonnés)</li>
@@ -147,9 +150,9 @@ gantt
 
     section Validation
         OC 5.3.4 x Lagaffe 9    :study-valid-mw-lagaffe9, 30-04-2025, 15d
-        OC 5.4.3 x MW Prod      :valid-oc-5-4, after study-valid-mw-lagaffe9, 15d
+        OC 5.4.3 x MW Prod      :valid-oc-5-4, after study-valid-mw-lagaffe9, 06-06-2025
         OC 5.3.5 x MW Prod      :v1, 05-05-2025, 15d
-        OC 5.4.3 x Lagaffe 9    :focus-valid-mwa-oc-5-4, after v1, 15d
+        OC 5.4.3 x Lagaffe 9    :focus-valid-mwa-oc-5-4, after v1, 06-06-2025
 
     %%────────────────────────── OneCore ──────────────────────────
     section OC | Ready to deploy
@@ -157,46 +160,46 @@ gantt
         ✔️ 5.4.3                  :milestone, milestone-valid-oc-5-4, after valid-oc-5-4, 0d
 
     section OC | Dépendances
-        HLS 8k                      : note-HLSexposed, after mep1, 4d
-        .                           :br, after note-HLSexposed, 07-07-2025
-        MEP HAPI retrait HLS     : milestone, milestone-hapi, 26-05-2025, 0d
+        HLS 8k                     : note-HLSexposed, after mep1, 4d
+        .                          :br, after note-HLSexposed, 14-07-2025
+        MEP HAPI retrait HLS       : milestone, milestone-hapi, 26-05-2025, 0d
 
     section OC | On Air
         OnePRM+Full DASH          :milestone, success-dash, after oc5-3, 0d
-        .                         :br, after success-dash, 07-07-2025
+        .                         :br, after success-dash, 14-07-2025
         OC ready Netflix Afr      :milestone, focus-oc-NetflixAfr, after oc5-3-5-cpi, 0d
 
     section OC | PROD 20% Métro
         5.2.3                     :oc5-2-Lot1, 20-04-2025, 24-04-2025
         5.3.3                     :oc5-3-Lot1, after oc5-2-Lot1, 22-05-2025
         1                         :milestone, mep1, after oc5-3-Lot1, 0d
-        5.3.5                     :oc5-3-5-Lot1, after oc5-3-Lot1, 17-06-2025
+        5.3.5                     :oc5-3-5-Lot1, after oc5-3-Lot1, 24-06-2025
         5                         :milestone, mep5, after oc5-3-5-Lot1, 0d
-        5.4.3                     :oc5-4-Lot1, after oc5-3-5-Lot1, 07-07-2025
+        5.4.3                     :oc5-4-Lot1, after oc5-3-5-Lot1, 14-07-2025
 
     section OC | PROD Full Métro
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 26-05-2025
         2                         :milestone, mep2, after oc5-3, 0d
-        5.3.5                     :oc5-3-5, after oc5-3, 17-06-2025
+        5.3.5                     :oc5-3-5, after oc5-3, 24-06-2025
         |                         :milestone, mep5, after oc5-3-5-Lot1, 0d
-        5.4.3                     :oc5-4, after oc5-3-5, 07-07-2025
+        5.4.3                     :oc5-4, after oc5-3-5, 14-07-2025
 
     section OC | PROD 40k G11 Afrique
         5.2.3                     :oc5-2-cpi, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3-cpi, 13-05-2025, 26-05-2025
         |                         :milestone, mep2, after oc5-3, 0d
-        5.3.5                     :oc5-3-5-cpi, after oc5-3-cpi, 03-06-2025
+        5.3.5                     :oc5-3-5-cpi, after oc5-3-cpi, 10-06-2025
         3                         :milestone, mep4, after oc5-3-5-cpi, 0d
-        5.4.3                     :focus-oc5-4, after oc5-3-5-cpi, 07-07-2025
+        5.4.3                     :focus-oc5-4, after oc5-3-5-cpi, 14-07-2025
 
     section OC | PROD Full DROM
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 26-05-2025
         |                         :milestone, mep2, after oc5-3, 0d
-        5.3.5                     :oc5-3-5, after oc5-3, 17-06-2025
+        5.3.5                     :oc5-3-5, after oc5-3, 24-06-2025
         |                         :milestone, mep5, after oc5-3-5-Lot1, 0d
-        5.4.3                     :oc5-4, after oc5-3-5, 07-07-2025
+        5.4.3                     :oc5-4, after oc5-3-5, 14-07-2025
 
     %%────────────────────────── MW ──────────────────────────
     section MW | Ready to deploy
@@ -209,27 +212,27 @@ gantt
 
     section MW | On Air
         MW ready Netflix Afr            :milestone, focus-mw-NetflixAfr, after mw-current-afr, 0d
-        MW Align.                       :milestone, success-mwa, after mw-current, 0d
+        MWA                       :milestone, success-mwa, after mw-current, 0d
 
     section MW | PROD 20% Métro
-        G9/G10 vs G11                   :mw-current-lot1, 20-04-2025, 24-06-2025
+        G9/G10 vs G11                   :mw-current-lot1, 20-04-2025, 30-06-2025
         6                               :milestone, mep6, after mw-current-lot1, 0d
-        MWA Lagaffe 9                   :mw-lagaffe-lot1, after mw-current-lot1, 07-07-2025
+        MWA Lagaffe 9                   :mw-lagaffe-lot1, after mw-current-lot1, 14-07-2025
 
     section MW | PROD Full Métro
-        G9/G10 vs G11                   :mw-current, 20-04-2025, 30-06-2025
+        G9/G10 vs G11                   :mw-current, 20-04-2025, 07-07-2025
         7                               :milestone, mep7, after mw-current, 0d
-        MWA Lag. 9                      :mw-lagaffe, after mw-current, 07-07-2025
+        MWA Lag. 9                      :mw-lagaffe, after mw-current, 14-07-2025
 
     section MW | PROD 40k G11 Afrique
-        G9/G10 vs G11                   :mw-current-afr, 20-04-2025, 10-06-2025
+        G9/G10 vs G11                   :mw-current-afr, 20-04-2025, 17-06-2025
         4                               :milestone, mep3, after mw-current-afr, 0d
-        MWA Lag. 9                      :focus-mw-lagaffe-afr, after mw-current-afr, 07-07-2025
+        MWA Lag. 9                      :focus-mw-lagaffe-afr, after mw-current-afr, 14-07-2025
 
     section MW | PROD Full DROM
-        G9/G10 vs G11                   :mw-current, 20-04-2025, 30-06-2025
+        G9/G10 vs G11                   :mw-current, 20-04-2025, 07-07-2025
         |                               :milestone, mep7, after mw-current, 0d
-        MWA Lag. 9                      :mw-lagaffe, after mw-current, 07-07-2025
+        MWA Lag. 9                      :mw-lagaffe, after mw-current, 14-07-2025
     </pre>
   </main>
 
