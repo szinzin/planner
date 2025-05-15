@@ -70,7 +70,7 @@ mermaid.initialize({
 <style>
 body { margin:0; font:16px/1.45 system-ui, sans-serif; }
 .wrapper { display:flex; gap:1.5rem; padding:1rem; height:100vh; box-sizing:border-box; }
-.notes  { flex:0 0 20%; overflow:auto; padding-right: 1.5rem; font-size: 13px;}
+.notes  { flex:0 0 20%; overflow:auto; padding-right: 1.5rem; font-size: 12px;}
 .notes>ul>li {margin-bottom: 16px; }
 .chart  { flex:1 1 80%; min-width:0; }
 .chart svg { width:100%!important; height:auto!important; }
@@ -103,7 +103,19 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
             </ul>
         </li>
         <li><b>OnePRM : </b>Sont concernés par cette migration les abonnés G11 Monde + les G9/G10 CPI (530k abonnés)</li>
-        <li><b>HLS G9/G10 : </b>Sur la phase transitoire des MEP OC 5.3.5, les 250k abonnés G9/G10 du lot 1 ne pourront pas lire les contenus HLS (erreur technique sur 3% / 8k d'anciens contenus). Une MEP HAPI est nécessaire pour ne plus exposer les contenus HLS sur GLine. Sera réalisée à l'issue du déploiement complet de la OC 5.3.5.</li>
+        <li><b>HLS G9/G10 : </b>
+            <ul>
+            <li>
+                Serveur PRM cible non configurable via clé OPVault (hardcodé) pour le format HLS.  
+                Environ 3 % du catalogue (8 000 contenus HLS) ne sera pas accessible après OnePRM (message d'erreur à la lecture) :  
+                un déploiement HAPI est nécessaire pour retirer ce fond de catalogue.
+            </li>
+            <li>
+                Pendant la phase transitoire de la MEP OC 5.3.5, les 250k abonnés G9/G10 du lot 1 seront confrontés à un message d'erreur en cas de lecture de ces contenus.  
+                La MEP HAPI interviendra dès que la OC 5.3.5 sera entièrement déployée.
+            </li>
+            </ul>
+        </li>
         <li><b>Débit DASH : </b>Le catalogue est désormais à 15 Mbps en production. Le bridage OneCore (introduit en 5.3.5 pour compenser la dégradation des performances de téléchargement 4K G9/G10 en attendant l’alignement MW) n'est donc plus nécessaire.</li>
         <li><b>Expiration DL TS : </b>Disque dur vendu en option en Afrique, ce qui limite l’impact des anciens téléchargements TS perdus lors de la migration Lagaffe.</li>
     </ul><br/>
@@ -147,7 +159,7 @@ gantt
     section OC | Dépendances
         HLS 8k                      : note-HLSexposed, after mep1, 4d
         .                           :br, after note-HLSexposed, 07-07-2025
-        MEP HAPI exposition HLS     : milestone, milestone-hapi, 26-05-2025, 0d
+        MEP HAPI retrait HLS     : milestone, milestone-hapi, 26-05-2025, 0d
 
     section OC | On Air
         OnePRM+Full DASH          :milestone, success-dash, after oc5-3, 0d
