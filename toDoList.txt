@@ -1,2 +1,5 @@
 - Afficher les couples MW/OC a, b, c ...
+- Affichage des milestones noires sur szinzin.github.com/planner
+
+
 - Début de semaine/trait le dimanche
