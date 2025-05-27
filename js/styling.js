@@ -38,7 +38,7 @@
 })();
 
 
-/* js/removePipeMilestoneText.js */
+/* js/removePipeMilestoneText.js - Not in use anymore */
 (function() {
   const maxTries = 20;
   let tries = 0;

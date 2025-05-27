@@ -20,6 +20,7 @@ mermaid.initialize({
 
     rect[id^="study"]      { fill:#8E44AD; }
     rect[id^="mep"]      { fill:black; }
+    text[id^="mep"]      { font-weight: bold; }
     rect[id^="milestone"]  { fill:lightgreen; }
     rect[id^="warning"]       { fill:lightgrey; stroke:lightgrey; }
     rect[id^="note"]       { fill:lightgrey; stroke:lightgrey; }
@@ -82,7 +83,7 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
   padding-left: 2.5rem;
 }
 .legend span { display:inline-flex; align-items:center; gap:.35rem; font-size:14px; }
-.sw { width:14px; height:14px; border-radius:2px; display:inline-block; }
+.sw { width:14px; height:14px; border-radius:2px; display:inline-block; line-height: 14px;}
 .sw.diamond { clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); }
 .warning {color: orange; font-weight: bold;}
 </style>
@@ -131,7 +132,7 @@ body { margin:0; font:16px/1.45 system-ui, sans-serif; }
         <span><i class="sw diamond" style="background:lightgreen"></i>Jalon</span>
         <span><i class="sw diamond" style="background:black"></i>Opération MEP</span>
         <span><i class="sw diamond" style="background:#FF2D95"></i>Focus / Target</span>
-        <span><i class="sw" style="background: transparent"></i>Couple OC+MW</span>
+        <span><text class="sw" id="mep-legend"><i><b>a</b></i></text>Couple OC+MW</span>
     </div>
   </aside>
 
@@ -172,33 +173,33 @@ gantt
     section OC | PROD 20% Métro
         5.2.3                     :oc5-2-Lot1, 20-04-2025, 24-04-2025
         5.3.3                     :oc5-3-Lot1, after oc5-2-Lot1, 22-05-2025
-        1                         :milestone, mep1, after oc5-3-Lot1, 0d
+        a                         :milestone, mep1, after oc5-3-Lot1, 0d
         5.3.5                     :oc5-3-5-Lot1, after oc5-3-Lot1, 24-06-2025
-        5                         :milestone, mep5, after oc5-3-5-Lot1, 0d
+        b                         :milestone, mep5, after oc5-3-5-Lot1, 0d
         5.4.3                     :oc5-4-Lot1, after oc5-3-5-Lot1, 14-07-2025
 
     section OC | PROD Full Métro
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 26-05-2025
-        2                         :milestone, mep2, after oc5-3, 0d
+        a                         :milestone, mep2, after oc5-3, 0d
         5.3.5                     :oc5-3-5, after oc5-3, 24-06-2025
-        |                         :milestone, mep5, after oc5-3-5-Lot1, 0d
+        b                         :milestone, mep5, after oc5-3-5-Lot1, 0d
         5.4.3                     :oc5-4, after oc5-3-5, 14-07-2025
 
     section OC | PROD 40k G11 Afrique
         5.2.3                     :oc5-2-cpi, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3-cpi, 13-05-2025, 26-05-2025
-        |                         :milestone, mep2, after oc5-3, 0d
+        a                         :milestone, mep2, after oc5-3, 0d
         5.3.5                     :oc5-3-5-cpi, after oc5-3-cpi, 10-06-2025
-        3                         :milestone, mep4, after oc5-3-5-cpi, 0d
+        b                         :milestone, mep4, after oc5-3-5-cpi, 0d
         5.4.3                     :focus-oc5-4, after oc5-3-5-cpi, 14-07-2025
 
     section OC | PROD Full DROM
         5.2.3                     :oc5-2, 20-04-2025, 13-05-2025
         5.3.3                     :oc5-3, 13-05-2025, 26-05-2025
-        |                         :milestone, mep2, after oc5-3, 0d
+        a                         :milestone, mep2, after oc5-3, 0d
         5.3.5                     :oc5-3-5, after oc5-3, 24-06-2025
-        |                         :milestone, mep5, after oc5-3-5-Lot1, 0d
+        b                         :milestone, mep5, after oc5-3-5-Lot1, 0d
         5.4.3                     :oc5-4, after oc5-3-5, 14-07-2025
 
     %%────────────────────────── MW ──────────────────────────
@@ -216,22 +217,22 @@ gantt
 
     section MW | PROD 20% Métro
         G9/G10 vs G11                   :mw-current-lot1, 20-04-2025, 30-06-2025
-        6                               :milestone, mep6, after mw-current-lot1, 0d
+        c                               :milestone, mep6, after mw-current-lot1, 0d
         MWA Lagaffe 9                   :mw-lagaffe-lot1, after mw-current-lot1, 14-07-2025
 
     section MW | PROD Full Métro
         G9/G10 vs G11                   :mw-current, 20-04-2025, 07-07-2025
-        7                               :milestone, mep7, after mw-current, 0d
+        c                               :milestone, mep7, after mw-current, 0d
         MWA Lag. 9                      :mw-lagaffe, after mw-current, 14-07-2025
 
     section MW | PROD 40k G11 Afrique
         G9/G10 vs G11                   :mw-current-afr, 20-04-2025, 17-06-2025
-        4                               :milestone, mep3, after mw-current-afr, 0d
+        c                               :milestone, mep3, after mw-current-afr, 0d
         MWA Lag. 9                      :focus-mw-lagaffe-afr, after mw-current-afr, 14-07-2025
 
     section MW | PROD Full DROM
         G9/G10 vs G11                   :mw-current, 20-04-2025, 07-07-2025
-        |                               :milestone, mep7, after mw-current, 0d
+        c                               :milestone, mep7, after mw-current, 0d
         MWA Lag. 9                      :mw-lagaffe, after mw-current, 14-07-2025
     </pre>
   </main>
